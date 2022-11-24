@@ -41,7 +41,7 @@ export default function SignupForm() {
   }, [email])
 
   return <>
-    <div className="border-1 rounded-md border-[#202637] bg-[#0c162d] p-8 z-10 relative">
+    <div className="border-[1px] rounded-md border-[#202637] bg-[#0c162d] p-8 z-10 relative">
       <h1 className="font-mono text-gray-400">
         <Typewriter
           onInit={(typewriter) => {
