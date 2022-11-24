@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import PasswordError from "./PasswordError";
 import TextField from "./Textfield";
+import Typewriter from 'typewriter-effect';
 
 export default function SignupForm() {
   const [email, setEmail] = useState('');
@@ -12,9 +13,11 @@ export default function SignupForm() {
   const [displayBtnIn, setDisplayBtnIn] = useState('email');
 
   // Handle display inputs
+  const [showEmail, setShowEmail] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showUsername, setShowUsername] = useState(false);
   const [subscribeEmail, setShowSubscribeEmail] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   // Handle Error state
   const [isEmailValid, setEmailValid] = useState(false);
@@ -39,8 +42,19 @@ export default function SignupForm() {
 
   return <>
     <div className="border-1 rounded-md border-[#202637] bg-[#0c162d] p-8 z-10 relative">
-      <h1 className="font-mono text-gray-400">Welcome to GitHub! Let’s begin the adventure</h1>
-      <TextField
+      <h1 className="font-mono text-gray-400">
+        <Typewriter
+          onInit={(typewriter) => {
+            typewriter.typeString('Welcome to GitHub! Let’s begin the adventure')
+              .callFunction(() => {
+                setShowEmail(true)
+                typewriter.stop();
+              })
+              .start()
+          }}
+        />
+        </h1>
+      {showEmail && <TextField
         label="Enter your email"
         displayBtn={displayBtnIn === 'email'}
         onChange={e => setEmail(e.target.value)}
@@ -52,7 +66,7 @@ export default function SignupForm() {
           setDisplayBtnIn('password')
         }}
         setDisplayBtnIn={() => setDisplayBtnIn('email')}
-      />
+      />}
 
       {/* Password input */}
       {showPassword && <TextField
@@ -99,11 +113,14 @@ export default function SignupForm() {
         type="text"
         onSubmit={() => {
           console.log('Line----101 SingupForm.tsx', 'submitted')
+          setSubmitted(true)
         }}
         setDisplayBtnIn={() => setDisplayBtnIn('subemail')}
       />}
     </div>
 
     {displayBtnIn === 'password' && password !== '' && passwordError && <PasswordError passwordError={passwordError} />}
+
+    {submitted && <p className="mt-10 text-center text-xl text-green-600">Woohoo! Your account is created!</p>}
   </>
 }
