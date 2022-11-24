@@ -30,6 +30,6 @@ export default function PasswordError({ passwordError }: PasswordErrorProps) {
       <div className={`w-12 h-1 rounded ${thirdMarkColor}`} />
     </div>
     <p className={`mt-1.5 ${passwordError?.toLowerCase().includes('short') ? 'text-red-600' : passwordError?.toLowerCase().includes('number') ? 'text-yellow-600' : 'text-green-600'}`}>{passwordError}</p>
-    <p className="text-base mt-1.5 text-[#627597]">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter.</p>
+    <p className="text-base mt-1.5 text-[#627597]">Make sure it&apos;s at least 15 characters OR at least 8 characters including a number and a lowercase letter.</p>
   </div>
 }
