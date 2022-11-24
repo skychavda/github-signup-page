@@ -13,7 +13,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 export default function TextField({ label, isValid, onSubmit, displayBtn, setDisplayBtnIn, ...props }: TextFieldProps) {
   const [customType, setCustomType] = useState(props.type);
 
-  return <div className="mt-5" onMouseEnter={() => setDisplayBtnIn()}>
+  return <div className="mt-5" onClick={() => setDisplayBtnIn()}>
     <div className="font-mono text-[#00cfc8]">{label}</div>
     <div className="group flex flex-row">
       {
@@ -21,7 +21,7 @@ export default function TextField({ label, isValid, onSubmit, displayBtn, setDis
           : <span className="after:content-['→'] text-red-500" />
       }
       <input
-        className="w-full font-mono text-white ml-2 focus:border-blue-500 focus:border-[1px] outline-0 text-base bg-transparent text-base"
+        className="w-full font-mono text-white ml-2 p-0 focus:border-blue-500 focus:border-[1px] outline-0 bg-transparent"
         {...props}
         type={customType}
         autoFocus
@@ -36,14 +36,15 @@ export default function TextField({ label, isValid, onSubmit, displayBtn, setDis
       {props.type === 'password' && displayBtn &&
         <button onClick={() => setCustomType(customType === 'password' ? 'text' : 'password')}>
           {customType === 'password' ? <OpenEyeIcon /> : <EyeCloseIcon />}
-        </button>}
+        </button>
+      }
 
-      {<button
+      <button
         className={`ml-2 ${displayBtn ? 'visible' : 'invisible'} ${isValid ? 'border-green-700 text-green-700' : 'border-slate-700 text-slate-700'} border-[1px] py-1 px-4 rounded`}
         onClick={isValid ? () => onSubmit() : () => { }}
       >
         Continue
-      </button>}
+      </button>
     </div>
   </div>
 }
