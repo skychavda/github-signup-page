@@ -13,7 +13,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 export default function TextField({ label, isValid, onSubmit, displayBtn, setDisplayBtnIn, ...props }: TextFieldProps) {
   const [customType, setCustomType] = useState(props.type);
 
-  return <div className="mt-5" onClick={() => setDisplayBtnIn()}>
+  return <div className="mt-5" onMouseDown={() => setDisplayBtnIn()}>
     <div className="font-mono text-[#00cfc8]">{label}</div>
     <div className="group flex flex-row">
       {
